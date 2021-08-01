@@ -1,0 +1,6 @@
+{
+    "db" : "mongodb://localhost/TravelAppTest",
+    "USERS_URL": "https://mbgp-raceeng.github.io/users.json",
+    "pw_salt":10,
+    "EVENTS_URL":"https://mbgp-raceeng.github.io/events.json"
+}

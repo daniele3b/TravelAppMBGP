@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
+    <title>Travel App Login </title>
+  </head>
+  <body>
+    
+<div id="app">
+         
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-6">
+                
+                    
+                        <h1>Travel App HOMEPAGE</h1>
+                   
+                
+            </div>
+        </div>
+    </div>
+    </div>
+            
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+         
+        },
+
+        beforeCreate: function () {
+         
+         
+        },
+
+        methods: {
+         login: function () {
+          
+
+            this.$http.get("http://localhost:8080/auth/email").then(
+            (response) => {
+                
+            },
+            (response) => {
+              this.data_temps=[]
+              if(this.data_temps.length==0)
+                alert("No data found!")
+            }
+          );
+          },
+
+          switch2Last: function (event) {
+            this.viewMode = false;
+            this.aggMode = false;
+            this.lastMode=true;
+
+            this.data_temps=[]
+
+            this.$http.get("http://localhost:8080/getLastHourDataTemperature").then(
+            (response) => {
+              this.data_temps = response.body;
+            },
+            (response) => {
+              this.data_temps=[]
+              if(this.data_temps.length==0)
+                alert("No data found!")
+            }
+          );
+          },
+
+
+          
+          switch2Agg: function () {
+            this.aggMode = true;
+            this.viewMode = false;
+            this.lastMode = false;
+
+
+            this.$http.get("http://localhost:8080/getAggregateDataTemperature").then(
+            (response) => {
+              this.agg_data_temps = response.body;
+            },
+            (response) => {
+              this.agg_data_temps=[]
+              if(this.agg_data_temps.length==0)
+                alert("No data found!")
+            }
+          );
+          },
+        }
+      })
+
+  
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #000000, #00D2BE)
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none
+}
+
+.box {
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #191919;
+    ;
+    text-align: center;
+    transition: 0.25s;
+    margin-top: 100px
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #000000;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+    width: 300px;
+    border-color: #00D2BE
+}
+.box input:focus::placeholder {
+  color: transparent;
+}
+
+.box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #00D2BE;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+.box input[type="submit"]:hover {
+    background: #00D2BE
+}
+
+.forgot {
+    text-decoration: underline
+}
+
+</style>
